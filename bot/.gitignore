@@ -1,0 +1,4 @@
+/tflearn_logs/*
+model.*
+training_data
+checkpoint

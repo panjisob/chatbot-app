@@ -1,0 +1,17 @@
+{
+    "tag": "semuafotografer",
+    "patterns":[
+        "disini siapa ajah fotografernya?",
+        "fotografer yang anda miliki?",
+        "berapa fotografer yang anda miliki?",
+        "siapa sajah fotografernya?",
+        "saya ingin menyewa fotografer?"
+    ],
+    "responses":["saya memiliki ","kami mempunyai"],
+    "fullfilment":{
+        "action":"semua",
+        "parameter":"*"
+    }
+            
+    
+}

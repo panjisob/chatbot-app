@@ -1,0 +1,110 @@
+{"intents": [
+    {"tag": "salam",
+     "patterns": ["Hai", "Apa kabar", "Halo", "Selamat siang"],
+     "responses": ["Halo, terima kasih telah mengunjungi", "halo, bisa saya bantu?", "Hai, bagaimana bisa saya membantu?"],
+     "context_set": ""
+    },
+    {"tag": "selamat tinggal",
+     "patterns": ["Sampai jumpa", "Sampai jumpa", "Selamat tinggal"],
+     "responses": ["Sampai jumpa lagi, terima kasih telah mengunjungi", "Semoga harimu menyenangkan", "Sampai jumpa! Kembali lagi nanti."]
+    },
+    {
+        "tag" : "jenis jasa fotografer",
+        "patterns" : ["mau tanya kalo jenis fotografernya ada apa ajh?","paket fotografernya ada apa ajh?", "menu fotografernya ada apa ajh","jasa fotografer apa jh yang tersedia?"],
+        "responses": ["Baik, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya"],
+        "request":{
+            "action":"",
+            "link":"http://127.0.0.1:5000/produk" 
+        }
+    },
+    {
+        "tag" : "fotografer_lainnya",
+        "patterns":["apakah ada jasa fotgrafer yang lain","jasa foto yang lain ada gak?"],
+        "responses":["Mohon maaf untuk jasa fotografer yang lainnya belum ada, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya"],
+        "request":{
+            "action":"",
+            "link":"http://127.0.0.1:5000/produk" 
+        }
+    },
+    {
+        "tag" : "biaya Preweding",
+        "patterns": ["Biaya untuk dokumentasi prewedding berapa yah?","Harga untuk fotografer preweding?"],
+        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+    },
+    {
+        "tag" : "biaya Ulang tahun",
+        "patterns": ["Biaya untuk dokumentasi ulang tahun berapa yah?","Harga untuk fotografer ulang tahun?"],
+        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+    },
+    {
+        "tag" : "biaya Ulang tahun",
+        "patterns": ["Biaya untuk dokumentasi ulang tahun berapa yah?","Harga untuk fotografer ulang tahun?"],
+        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+    },
+    {
+        "tag":"tidak_pesan",
+        "patterns": ["saya tidak pesan", "nggak jadi pesan"],
+        "responses": ["Baik, Terimakasih telah mengunjungai kami"]
+    },
+    {
+        "tag":"pesan_prewedding",
+        "patterns": ["saya mau pesan jasa foto prewedding"],
+        "responses": ["Baik pemesanan anda akan kami proses, kira kira tanggal pelaksanaan tanggal berapa?"]
+    },
+    {
+        "tag":"cek_tgl",
+        "patterns":["untuk tanggal pelaksanaannya 10/10/2019","tgl pelaksanan 1/6/2018"],
+        "responses":["okeh anda akan memesan tgl tersebut","Maaf pada tanggal tersebut penuh"],
+        "request":{
+            "action":"get_tgl",
+            "link":"http://127.0.0.1:5000/cek_jadwal/" 
+        }
+    },  
+    {
+        "tag": "nama",
+        "patterns":["Nama Saya adalah Bla bla","Nama : Bla bla"],
+        "responses":["Alamat ?"],
+        "request":{
+            "action":"get_name",
+            "link":"http://127.0.0.1:5000/pesan_addnama/" 
+        }
+    },
+    {
+        "tag":"email",
+        "patterns":["email saya adalah","e-mail:"],
+        "responses":["no telpon?"],
+        "request":{
+            "action":"get_email",
+            "link":"http://127.0.0.1:5000/pesan_addemail/" 
+        }
+    },
+    {
+        "tag":"telpon",
+        "patterns":["no telon : 099766554", "nomer telpon saya adalah 090807897"],
+        "responses":["apakah data yang anda masukan sudah sesuai?"],
+        "request":{
+            "action":"get_nohp",
+            "link":"http://127.0.0.1:5000/pesan_addnohp/" 
+        }
+    },
+    {
+        "tag": "semua_fotografer",
+        "patterns": ["fotografernya?","fotografernya siapa ajh?","minta list nama-nama semua fotografer"],
+        "responses": ["fotografer yang kami miliki adalah :  ","kami memiliki fotografer : "],
+        "request":{
+            "action":"",
+            "link":"http://127.0.0.1:5000/" 
+        } 
+    },
+    {
+        "tag": "thanks",
+        "patterns": ["Terima kasih", "Itu membantu"],
+        "responses": ["Senang membantu!", "Sama sama", "Senang"]
+    }, 
+    {
+        "tag": "noanswer",
+        "patterns": [""],
+        "responses": ["Maaf, saya tidak mengerti", "Tolong beri saya info lebih lanjut", "Saya tidak mengerti", "bisa di ulang"]
+    }
+]
+}
