@@ -11,7 +11,7 @@
     {
         "tag" : "jenis jasa fotografer",
         "patterns" : ["mau tanya kalo jenis fotografernya ada apa ajh?","paket fotografernya ada apa ajh?", "menu fotografernya ada apa ajh","jasa fotografer apa jh yang tersedia?"],
-        "responses": ["Baik, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya"],
+        "responses": ["Baik, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya %s \n pilih dengan contoh saya mau pesan 1(no)"],
         "request":{
             "action":"",
             "link":"http://127.0.0.1:5000/produk" 
@@ -20,7 +20,7 @@
     {
         "tag" : "fotografer_lainnya",
         "patterns":["apakah ada jasa fotgrafer yang lain","jasa foto yang lain ada gak?"],
-        "responses":["Mohon maaf untuk jasa fotografer yang lainnya belum ada, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya"],
+        "responses":["Mohon maaf untuk jasa fotografer yang lainnya belum ada, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya %s"],
         "request":{
             "action":"",
             "link":"http://127.0.0.1:5000/produk" 
@@ -48,13 +48,17 @@
     },
     {
         "tag":"pesan_prewedding",
-        "patterns": ["saya mau pesan jasa foto prewedding"],
-        "responses": ["Baik pemesanan anda akan kami proses, kira kira tanggal pelaksanaan tanggal berapa?"]
+        "patterns": ["saya mau pesan jasa foto no 1 prewedding","pesan untuk foto ulang tahun yang no 2","ya saya mau pesan jasa ini yg no 3"],
+        "responses": ["Baik pemesanan anda akan kami proses, kira kira tanggal pelaksanaan tanggal berapa?"],
+        "request":{
+            "action":"get_number",
+            "link":"http://127.0.0.1:5000/booking/" 
+        }
     },
     {
         "tag":"cek_tgl",
-        "patterns":["untuk tanggal pelaksanaannya 10/10/2019","tgl pelaksanan 1/6/2018"],
-        "responses":["okeh anda akan memesan tgl tersebut","Maaf pada tanggal tersebut penuh"],
+        "patterns":["untuk tanggal pelaksanaannya 10/10/2019","tgl pelaksanan 1/6/2018","pelaksanaanya pada tanggal 2019-07-31"],
+        "responses":["okeh anda akan memesan tanggal tersebut \n silahkan isi nama anda...","Maaf pada tanggal tersebut penuh"],
         "request":{
             "action":"get_tgl",
             "link":"http://127.0.0.1:5000/cek_jadwal/" 
@@ -63,10 +67,10 @@
     {
         "tag": "nama",
         "patterns":["Nama Saya adalah Bla bla","Nama : Bla bla"],
-        "responses":["Alamat ?"],
+        "responses":["masukan email dan number hp \n contoh : \n email = contoh@mail.com atau email saya adalah contoh@mail.com"],
         "request":{
             "action":"get_name",
-            "link":"http://127.0.0.1:5000/pesan_addnama/" 
+            "link":"http://127.0.0.1:5000/pesan_addnama" 
         }
     },
     {

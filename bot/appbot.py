@@ -20,7 +20,7 @@ import random
 import re
 import nltk
 from nltk.corpus import stopwords
-stop = stopwords.words('indonesia')
+stop = stopwords.words()
 
 import json
 with open('intents.json') as json_data:
@@ -174,6 +174,10 @@ def extract_names(document):
                     names.append(' '.join([c[0] for c in chunk]))
     return names
 
+def extract_number(documents):
+    res = [int(i) for i in documents.split() if i.isdigit()]
+    return res
+
 ERROR_THRESHOLD = 0.25
 def classify(sentence):
     # generate probabilities from the model
@@ -197,7 +201,6 @@ def check_tgl(sentence):
             if x[1] == "CD":
                     return x[0]
 
-
 def response(sentence, userID='123', show_details=False):
     results = classify(sentence)
     # if we have a classification then find the matching intent tag
@@ -215,43 +218,49 @@ def response(sentence, userID='123', show_details=False):
                             req = i['request']['link']+t
                             print(req)
                             text = requests.get(req).json()
-                            try:
-                                print(text["data"][0])
-                                return {"text":i['responses'][0]}
-                            except:
+                            print(text)
+                            if text['data'] == 'penuh':
                                 print('penuh ')
                                 return {"text":i['responses'][1]}
-                        
+                            else:
+                                return {"text":i['responses'][0]}                    
                         if 'get_name' in i['request']['action']:
                             # print("get")
                             name = extract_names(sentence)
-                            # t = tgl.replace("/","-")
-                            req = i['request']['link']+t
-                            print(req)
-                            text = requests.get(req).json()
+                            print(name)
+                            data = {'param':name}
+                            API_ENDPOINT = i['request']['link']
+                            text = requests.post(url = API_ENDPOINT, json= data)
+                            print(text)
                         if 'get_email' in i['request']['action']:
-                            # print("get")
-                            name = extract_email_addresses(sentence)
-                            # t = tgl.replace("/","-")
-                            req = i['request']['link']+t
-                            print(req)
-                            text = requests.get(req).json()
+                            email = extract_email_addresses(sentence)
+                            nohp = extract_phone_numbers(sentence)
+                            data = {'email':email[0],'nohp':nohp[0]}
+                            API_ENDPOINT = i['request']['link']
+                            print(data)
+                            # text = requests.get(req).json()
                         if 'get_nohp' in i['request']['action']:
                             # print("get")
-                            name = extract_phone_numbers(sentence)
-                            # t = tgl.replace("/","-")
-                            req = i['request']['link']+t
+                            nohp = extract_phone_numbers(sentence)
+                            print(nohp)
+                            req = i['request']['link']+str(nohp)
+                            print(req)
+                            text = requests.get(req).json()
+                        if 'get_number' in i['request']['action']:
+                            number = extract_number(sentence)
+                            print(number[0]) 
+                            req = i['request']['link']+str(number[0])
                             print(req)
                             text = requests.get(req).json()
                         else:
                             print (i['request']['link'])
                             text = requests.get(i['request']['link']).json()
-                            y = ""
+                            y = "" 
                             z = 0
                             while z < len(text["data"]):
-                                y = y + "\n" + text["data"][z]["nama_produk"]
-                                z += 1
-                            resp = random.choice(i['responses'])+y
+                                y = y + "\n"+str(text["data"][z]["id_produk"])+" " + text["data"][z]["nama_produk"]
+                                z += 1 
+                            resp = (random.choice(i['responses']) % y)
                             return {"text":resp}
                     # set context for this intent if necessary
                     if 'context_set' in i:
