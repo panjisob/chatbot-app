@@ -232,16 +232,22 @@ def response(sentence, userID='123', show_details=False):
                             API_ENDPOINT = i['request']['link']
                             text = requests.post(url = API_ENDPOINT, json= data)
                             print(text)
-                        if 'get_email' in i['request']['action']:
+                            resp = (random.choice(i['responses']))
+                            return {"text":resp}
+                        if 'get_data' in i['request']['action']:
                             email = extract_email_addresses(sentence)
                             nohp = extract_phone_numbers(sentence)
+                            print(email)
                             data = {'email':email[0],'nohp':nohp[0]}
                             API_ENDPOINT = i['request']['link']
                             print(data)
+                            text = requests.post(url = API_ENDPOINT, json= data)
                             # text = requests.get(req).json()
+                            resp = (random.choice(i['responses']))
+                            return {"text":resp}
                         if 'get_nohp' in i['request']['action']:
                             # print("get")
-                            nohp = extract_phone_numbers(sentence)
+                            nohp = extract_phone_numbers(sentence) 
                             print(nohp)
                             req = i['request']['link']+str(nohp)
                             print(req)
@@ -252,6 +258,15 @@ def response(sentence, userID='123', show_details=False):
                             req = i['request']['link']+str(number[0])
                             print(req)
                             text = requests.get(req).json()
+                            resp = (random.choice(i['responses']))
+                            return {"text":resp}
+                        if 'harga' in i['request']['action']:
+                            req = i['request']['link']
+                            print(req)
+                            text = requests.get(req).json()
+                            print(text) 
+                            resp = (random.choice(i['responses']) % text['data']) 
+                            return {"text":resp}
                         else:
                             print (i['request']['link'])
                             text = requests.get(i['request']['link']).json()

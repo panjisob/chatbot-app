@@ -1,8 +1,11 @@
 {"intents": [
     {"tag": "salam",
-     "patterns": ["Hai", "Apa kabar", "Halo", "Selamat siang"],
-     "responses": ["Halo, terima kasih telah mengunjungi", "halo, bisa saya bantu?", "Hai, bagaimana bisa saya membantu?"],
-     "context_set": ""
+     "patterns": ["Hai", "Apa kabar", "Hallo","Hei","permisi","helo","hello"],
+     "responses": ["Hallo, saya robot chat yang dapat membantu anda, \n disini saya menyediakan beberapa jasa fotografer, diantaranya %s \n ada yang ditanyakan?"],
+        "request":{
+            "action":"",
+            "link":"http://127.0.0.1:5000/produk" 
+        }
     },
     {"tag": "selamat tinggal",
      "patterns": ["Sampai jumpa", "Sampai jumpa", "Selamat tinggal"],
@@ -11,7 +14,7 @@
     {
         "tag" : "jenis jasa fotografer",
         "patterns" : ["mau tanya kalo jenis fotografernya ada apa ajh?","paket fotografernya ada apa ajh?", "menu fotografernya ada apa ajh","jasa fotografer apa jh yang tersedia?"],
-        "responses": ["Baik, kami menyediakan beberapa jasa fotografer,\n apabila ada yang ditanyakan mohon untuk bertanya satu persatu, \n jasa fotografer yang kami mmiliki diantaranya %s \n pilih dengan contoh saya mau pesan 1(no)"],
+        "responses": ["Baik, kami menyediakan beberapa jasa fotografer, diantaranya %s \n pilih dengan contoh saya mau pesan 1(no)"],
         "request":{
             "action":"",
             "link":"http://127.0.0.1:5000/produk" 
@@ -28,18 +31,30 @@
     },
     {
         "tag" : "biaya Preweding",
-        "patterns": ["Biaya untuk dokumentasi prewedding berapa yah?","Harga untuk fotografer preweding?"],
-        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+        "patterns": ["Biaya untuk dokumentasi prewedding berapa yah?","Harga untuk fotografer preweding?","harga atau biaya yang harus dibayar buat jasa prewedding berapa?","berapa biaya jasa foto prewedding?"],
+        "responses": ["Biaya untuk prewedding adalah %s apakah anda mau pesan? \n contoh saya mau pesan 1(no) jasa prewedding"],
+        "request":{
+            "action":"harga",
+            "link":"http://127.0.0.1:5000/harga/1" 
+        }
     },
     {
-        "tag" : "biaya Ulang tahun",
-        "patterns": ["Biaya untuk dokumentasi ulang tahun berapa yah?","Harga untuk fotografer ulang tahun?"],
-        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+        "tag" : "biaya ulang tahun",
+        "patterns": ["Biaya untuk dokumentasi ulang tahun berapa yah?","Harga untuk fotografer ultah?","harga atau biaya yang harus dibayar buat jasa foto ulang tahun berapa?", "berapa biaya jasa foto ulang tahun?"],
+        "responses": ["Biaya untuk jasa foto ulang tahun adalah %s apakah anda mau pesan? \n contoh saya mau pesan 2(no) jasa ulang tahun"],
+        "request":{
+            "action":"harga",
+            "link":"http://127.0.0.1:5000/harga/2" 
+        }
     },
     {
-        "tag" : "biaya Ulang tahun",
-        "patterns": ["Biaya untuk dokumentasi ulang tahun berapa yah?","Harga untuk fotografer ulang tahun?"],
-        "responses": ["Biaya untuk prewedding adalah Rp.1.000.000 apakah anda mau pesan?"]
+        "tag" : "biaya treveling",
+        "patterns": ["Biaya untuk dokumentasi treveling berapa yah?","Harga untuk fotografer treveling?","harga atau biaya yang harus dibayar buat jasa treveling berapa?","berapa biaya jasa foto treveling"],
+        "responses": ["Biaya untuk treveling adalah %s apakah anda mau pesan? \n contoh saya mau pesan 3(no) jasa treveling"],
+        "request":{
+            "action":"harga",
+            "link":"http://127.0.0.1:5000/harga/3" 
+        }
     },
     {
         "tag":"tidak_pesan",
@@ -47,7 +62,7 @@
         "responses": ["Baik, Terimakasih telah mengunjungai kami"]
     },
     {
-        "tag":"pesan_prewedding",
+        "tag":"pesan",
         "patterns": ["saya mau pesan jasa foto no 1 prewedding","pesan untuk foto ulang tahun yang no 2","ya saya mau pesan jasa ini yg no 3"],
         "responses": ["Baik pemesanan anda akan kami proses, kira kira tanggal pelaksanaan tanggal berapa?"],
         "request":{
@@ -67,7 +82,7 @@
     {
         "tag": "nama",
         "patterns":["Nama Saya adalah Bla bla","Nama : Bla bla"],
-        "responses":["masukan email dan number hp \n contoh : \n email = contoh@mail.com atau email saya adalah contoh@mail.com"],
+        "responses":["masukan email dan number hp \n contoh : \n email = contoh@mail.com no hp = 08123456"],
         "request":{
             "action":"get_name",
             "link":"http://127.0.0.1:5000/pesan_addnama" 
@@ -75,20 +90,11 @@
     },
     {
         "tag":"email",
-        "patterns":["email saya adalah","e-mail:"],
-        "responses":["no telpon?"],
+        "patterns":["email saya adalah anu@mail.com dan no hp = 0823578533","e-mail = anu@anu.com, nohp : 080887876 ","email : anu@anu.com dan no hp : 0809988787"],
+        "responses":["peasnan anda sudah disimpan kedalam database.."],
         "request":{
-            "action":"get_email",
-            "link":"http://127.0.0.1:5000/pesan_addemail/" 
-        }
-    },
-    {
-        "tag":"telpon",
-        "patterns":["no telon : 099766554", "nomer telpon saya adalah 090807897"],
-        "responses":["apakah data yang anda masukan sudah sesuai?"],
-        "request":{
-            "action":"get_nohp",
-            "link":"http://127.0.0.1:5000/pesan_addnohp/" 
+            "action":"get_data",
+            "link":"http://127.0.0.1:5000/add_data" 
         }
     },
     {
