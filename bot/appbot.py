@@ -225,15 +225,17 @@ def response(sentence, userID='123', show_details=False):
                             else:
                                 return {"text":i['responses'][0]}                    
                         if 'get_name' in i['request']['action']:
-                            # print("get")
                             name = extract_names(sentence)
-                            print(name)
-                            data = {'param':name}
-                            API_ENDPOINT = i['request']['link']
-                            text = requests.post(url = API_ENDPOINT, json= data)
-                            print(text)
-                            resp = (random.choice(i['responses']))
-                            return {"text":resp}
+                            try:
+                                print(name[0])
+                                data = {'param':name}
+                                API_ENDPOINT = i['request']['link']
+                                text = requests.post(url = API_ENDPOINT, json= data)
+                                print(text)
+                                resp = (random.choice(i['responses']))
+                                return {"text":resp}
+                            except IndexError:
+                                return {"text":"maaf pesanan tidak bisa kami proses, dalam penulisan nama mohon diawali dengan menggunakan huruf besar"}
                         if 'get_data' in i['request']['action']:
                             email = extract_email_addresses(sentence)
                             nohp = extract_phone_numbers(sentence)
@@ -254,12 +256,15 @@ def response(sentence, userID='123', show_details=False):
                             text = requests.get(req).json()
                         if 'get_number' in i['request']['action']:
                             number = extract_number(sentence)
-                            print(number[0]) 
-                            req = i['request']['link']+str(number[0])
-                            print(req)
-                            text = requests.get(req).json()
-                            resp = (random.choice(i['responses']))
-                            return {"text":resp}
+                            try:
+                                print(number[0]) 
+                                req = i['request']['link']+str(number[0])
+                                print(req)
+                                text = requests.get(req).json()
+                                resp = (random.choice(i['responses']))
+                                return {"text":resp}
+                            except IndexError:
+                                return {"text":"maaf pesanan tidak bisa kami proses, mohon untuk menambahkan nomornya juga"}
                         if 'harga' in i['request']['action']:
                             req = i['request']['link']
                             print(req)

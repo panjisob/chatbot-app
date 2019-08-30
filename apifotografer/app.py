@@ -80,7 +80,7 @@ def pesan_addnama():
         abort(400)
     nama = request.json['param']
     print (nama[0])
-    sql = "insert into pemesan (nama) values ('%s')"
+    sql = "insert into pelanggan (nama) values ('%s')"
     print(sql%nama[0])
     cur.execute(sql%nama[0])
     mydb.commit()
@@ -91,13 +91,13 @@ def pesan_addnoh():
     if not request.json:
         abort(400)
     print (request.json)
-    sql = "SELECT id FROM pemesan ORDER BY id DESC LIMIT 1"
+    sql = "SELECT id_pelanggan FROM pelanggan ORDER BY id_pelanggan DESC LIMIT 1"
     cur.execute(sql)
     id = cur.fetchall()
     for id_fg in id:
         pass
     data = request.json
-    sql = "update pemesan set email='%s', no_hp='%s' where id=%s"
+    sql = "update pelanggan set email='%s', no_hp='%s' where id_pelanggan=%s"
     print(sql%(data['email'],data['nohp'],id_fg[0]))
     cur.execute(sql%(data['email'],data['nohp'],id_fg[0]))
     mydb.commit()
@@ -107,7 +107,7 @@ def pesan_addnoh():
     id_bk = cur.fetchall()
     for i in id_bk:
         pass
-    sql = "update booking set id_pemesan=%s where id_booking=%s"
+    sql = "update booking set id_pelanggan=%s where id_booking=%s"
     print(sql%(id_fg[0],i[0]))
     cur.execute(sql%(id_fg[0],i[0]))
     mydb.commit()
