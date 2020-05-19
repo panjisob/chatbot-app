@@ -11,7 +11,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "firebase": "^5.5.7",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.22.2",
     "popper.js": "^1.14.4",
     "register-service-worker": "^1.6.2",
